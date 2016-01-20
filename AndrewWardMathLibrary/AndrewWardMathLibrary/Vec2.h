@@ -43,6 +43,7 @@ namespace andMath {
 	};
 	//binary operations 
 	float dot(const vec2 &lhs, const vec2 &rhs) { return (lhs.x * rhs.x) + (lhs.y * rhs.y); }
+	vec2 interpolate(const vec2 &lhs, const vec2 &rhs, float a);
 
 	vec2 operator+  (const vec2 &lhs, const vec2 &rhs){
 		vec2 c;
