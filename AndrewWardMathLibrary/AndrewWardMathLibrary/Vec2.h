@@ -5,7 +5,7 @@
 
 //FLT_EPSILON
 namespace andMath {
-__declspec(align(32)) struct vec2 {
+	__declspec(align(32)) struct vec2 {
 		union {
 			float v[2];
 			struct { float x, y; };

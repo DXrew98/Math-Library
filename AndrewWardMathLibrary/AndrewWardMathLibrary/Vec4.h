@@ -20,8 +20,8 @@ __declspec(align(32))struct vec4 {
 	//binary operations 
 	float dot(const vec4 &lhs, const vec4 &rhs);
 
-	static vec4 lerp(const vec4 &lhs, const vec4 &rhs, float t);
-	static vec4 reflect(const vec4 &lhs, const vec4 &norm);
+	vec4 lerp(const vec4 &lhs, const vec4 &rhs, float t);
+	vec4 reflect(const vec4 &lhs, const vec4 &norm);
 
 	vec4 operator+  (const vec4 &lhs, const vec4 &rhs);
 	vec4 operator+= (vec4 &lhs, const vec4 &rhs);

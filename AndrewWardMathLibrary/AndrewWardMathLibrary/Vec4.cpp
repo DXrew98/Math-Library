@@ -3,17 +3,19 @@
 float andMath::vec4::mag()		const { return sqrtf(x * x + y * y + z * z + w * w); }
 andMath::vec4 andMath::vec4::normal()	const {
 	vec4 c;
-	c.x = x / mag();
-	c.y = y / mag();
-	c.z = z / mag();
-	c.w = w / mag();
+	float m = mag();
+	c.x = x / m;
+	c.y = y / m;
+	c.z = z / m;
+	c.w = w / m;
 	return c;
 }
 void andMath::vec4::normalize() {
-	x /= mag();
-	y /= mag();
-	z /= mag();
-	w / mag();
+	float m = mag();
+	x /= m;
+	y /= m;
+	z /= m;
+	w /= m;
 }
 andMath::vec4 andMath::vec4::operator-()const {
 	vec4 c;
@@ -26,8 +28,8 @@ andMath::vec4 andMath::vec4::operator-()const {
 
 float andMath::dot(const vec4 &lhs, const vec4 &rhs) { return (lhs.x * rhs.x) + (lhs.y * rhs.y) + (lhs.z * rhs.z) + (lhs.w * rhs.w); }
 
-static andMath::vec4 andMath::lerp(const vec4 &lhs, const vec4 &rhs, float t) { return lhs * t + rhs * (1 - t); }// add clamp betwwen 0-1
-static andMath::vec4 andMath::reflect(const vec4 &lhs, const vec4 &norm) { return 2 * (dot(lhs, norm)) * norm - lhs; }
+andMath::vec4 andMath::lerp(const vec4 &lhs, const vec4 &rhs, float t) { return lhs * t + rhs * (1 - t); }// add clamp betwwen 0-1
+andMath::vec4 andMath::reflect(const vec4 &lhs, const vec4 &norm) { return 2 * (dot(lhs, norm)) * norm - lhs; }
 
 andMath::vec4 andMath::operator+  (const vec4 &lhs, const vec4 &rhs) {
 	vec4 c;
@@ -50,7 +52,7 @@ andMath::vec4 andMath::operator-  (const vec4 &lhs, const vec4 &rhs) {
 	return  c;
 }
 andMath::vec4 andMath::operator-= (vec4 &lhs, const vec4 &rhs) {
-	return lhs = lhs + rhs;
+	return lhs = lhs - rhs;
 }
 
 andMath::vec4 andMath::operator*  (const vec4 &lhs, float rhs) {

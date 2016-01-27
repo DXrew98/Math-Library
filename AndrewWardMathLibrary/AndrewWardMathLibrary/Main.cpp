@@ -143,7 +143,7 @@ void vec3Tests() {
 	//vector for mag test 
 	andMath::vec3 g{ 2, 2, 2 };
 
-	//assert(fabs(sqrt(2) - e.mag()) < FLT_EPSILON);
+	assert(fabs(sqrt(3) - e.mag()) < FLT_EPSILON);
 
 
 	//normal tests
@@ -235,12 +235,117 @@ void vec3Tests() {
 }
 
 void vec4Tests() {
+	//new vectors to test with
+	andMath::vec4 a{ 5, 1, 3, 2 };
+	andMath::vec4 b{ 2, 12, 3, 4 };
+	andMath::vec4 c;
+	float d = 2; //used for multi and div tests and float tests
+	float d2;
+
+	//vectors for bool tests
+	andMath::vec4 e{ 1, 1, 1, 1 };
+	andMath::vec4 f{ 1, 1, 1, 1 };
+	andMath::vec4 h{ 10, 0, 2, 0 };
+	andMath::vec4 i{ 0, 0, 1, 0 };
+
+	//vector for mag test 
+	andMath::vec4 g{ 2, 2, 2, 2 };
+
+	assert(fabs(sqrt(4) - e.mag()) < FLT_EPSILON);
+
+
+	//normal tests
+	//reseting c
+	c = { 0, 0, 0, 0 };
+	andMath::vec4 norm1Result = { (2 / sqrtf(16)), (2 / sqrtf(16)), (2 / sqrtf(16)), (2 / sqrtf(16)) };
+	c = g.normal();
+	assert(c == norm1Result);
+
+	//normalizing a vector
+	andMath::vec4 norm2Result = { (2 / sqrtf(16)), (2 / sqrtf(16)), (2 / sqrtf(16)), (2 / sqrtf(16)) };
+	g.normalize();
+	assert(g == norm2Result);
+
+	//sign flip
+	c = { 0, 0, 0 };
+	andMath::vec4 flipResult = { -5, -1, -3, -2 };
+	c = a.operator-();
+	assert(c == flipResult);
+
+	//dot product
+	d2 = 0;
+	float dotResult = 39;
+	d2 = dot(a, b);
+	assert(d2 == dotResult);
+
+	//lerp
+	float t = .5;
+	c = { 0, 0, 0 };
+	andMath::vec4 lerpResult = { 5, 0, 1.5, 0 };
+	c = lerp(i, h, t);
+	assert(c == lerpResult);
+
+	//Operators
+	//+
+	andMath::vec4 pResult = { 7, 13, 6, 6 };
+	c = a + b;
+	assert(c == pResult);
+
+	//+=
+	andMath::vec4 pEResult = { 9, 25, 9, 10 };
+	c += b;
+	assert(c == pEResult);
+
+	//reseting c
+	c = { 0, 0, 0, 0 };
+	//-
+	andMath::vec4 miResult = { 3, -11, 0, -2 };
+	c = a - b;
+	assert(c == miResult);
+
+	//-=
+	andMath::vec4 miEResult = { 1, -23, -3, -6 };
+	c -= b;
+	assert(c == miEResult);
+
+	//reseting c
+	c = { 0, 0, 0, 0 };
+	//*
+	andMath::vec4 tResult = { 10, 2, 6, 4 };
+	c = a * d;
+	assert(c == tResult);
+
+	//*=
+	andMath::vec4 tEResult = { 20, 4, 12, 8 };
+	c *= d;
+	assert(c == tEResult);
+
+	//reseting c
+	c = { 0, 0, 0 };
+	//*
+	andMath::vec4 dResult = { 2.5, .5, 1.5, 1 };
+	c = a / d;
+	assert(c == dResult);
+
+	//*=
+	andMath::vec4 dEResult = { 1.25, .25, .75, .5 };
+	c /= d;
+	assert(c == dEResult);
+
+	//bool tests
+	assert(e == f);
+	assert(h != a);
+	assert(e < b);
+	assert(e <= a);
+	assert(b > a);
+	assert(a >= e);
 
 }
 
 int main() {
 	vec2Tests();
 	vec3Tests();
+	vec4Tests();
 
 	system("pause");
 	return 0;

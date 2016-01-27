@@ -96,8 +96,8 @@ andMath::vec3 andMath::operator/  (float rhs, const vec3 &lhs) {
 andMath::vec3 andMath::operator/= (vec3 &lhs, float rhs) {
 	return lhs = lhs / rhs;
 }
-andMath::vec3 andMath::operator/= (float rhs, vec3 &lhs) {
-	return lhs = lhs / rhs;
+andMath::vec3 andMath::operator/= (float rhs, vec3 &lhs) { 
+	return lhs = lhs / rhs; 
 }
 
 bool andMath::operator== (const vec3 &lhs, const vec3 &rhs) { return (fabs(lhs.x - rhs.x) < FLT_EPSILON && fabs(lhs.y - rhs.y) < FLT_EPSILON) && fabs(lhs.z - rhs.z) < FLT_EPSILON; }
