@@ -15,10 +15,12 @@ andMath::mat3 andMath::transpose(const mat3 & a)
 	n.c[0] = { a.mm[0][0], a.mm[1][0], a.mm[2][0] };
 	n.c[1] = { a.mm[0][1], a.mm[1][1], a.mm[2][1] };
 	n.c[2] = { a.mm[0][2], a.mm[1][2], a.mm[2][2] };
-	return mat3();
+	return n;
 }
 andMath::mat3 andMath::inverse(const mat3 & a)
 {
+	mat3 n;
+
 	return mat3();
 }
 
@@ -34,12 +36,18 @@ andMath::mat3 andMath::rotate(float a)
 	n.c[1] = { -sinf(a), cosf(a), 0 };
 	return n;
 }
-andMath::mat3 andMath::translate(const vec2 & a)
+andMath::mat3 andMath::translate(const vec2 &a)
 {
-	return mat3();
+	mat3 n = n.identity;
+	n.mm[2][0] = a.x;
+	n.mm[2][1] = a.x;
+	return n;
 }
 andMath::mat3 andMath::scale(const vec2 & a)
 {
+	mat3 n = n.identity;
+	n.mm[0][0] = scale;
+	n.mm[1][1] = scale;
 	return mat3();
 }
 
