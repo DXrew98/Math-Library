@@ -40,4 +40,8 @@ namespace andMath {
 
 	bool operator == (const mat4 &a, const mat4 &b);
 	bool operator != (const mat4 &a, const mat4 &b);
+
+	mat4 ortho(float left, float right, float bottom, float top, float near, float far);
+	mat4 frustum(float left, float right, float bottom, float top, float near, float far);
+	mat4 perspective(float fov, float aspect, float near, float far);
 }
