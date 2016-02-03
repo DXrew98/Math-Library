@@ -16,7 +16,14 @@ __declspec(align(32))struct vec3 {
 		vec3 normal()	const;
 		void normalize();
 		vec3 operator-()const;
-	};
+
+		static vec3 make(float x, float y, float z)
+		{
+			return{ x,y,z };
+		}
+};
+
+
 	//binary operations 
 	float dot(const vec3 &lhs, const vec3 &rhs);
 	vec3 cross(const vec3 &lhs, const vec3 &rhs);

@@ -20,13 +20,23 @@ andMath::mat3 andMath::transpose(const mat3 & a)
 andMath::mat3 andMath::inverse(const mat3 & a)
 {
 	mat3 n;
+	mat3 mC = {  1, -1, 1, -1, 1, -1, 1, -1, 1  };
 
-	return mat3();
+	n.c[0] = { a.m[5] * a.m[9] - a.m[6] * a.m[8], a.m[4] * a.m[9] - a.m[6] * a.m[7], a.m[4] * a.m[8] - a.m[5] * a.m[7] };
+	n.c[1] = { a.m[2] * a.m[9] - a.m[3] * a.m[8], a.m[1] * a.m[9] - a.m[3] * a.m[7], a.m[1] * a.m[8] - a.m[2] * a.m[7] };
+	n.c[2] = { a.m[2] * a.m[6] - a.m[3] * a.m[5], a.m[1] * a.m[6] - a.m[3] * a.m[4], a.m[1] * a.m[5] - a.m[2] * a.m[4] };
+
+	n *= mC;
+
+	return (transpose(n) * (1 / determinant(n)));
 }
 
-andMath::mat3 andMath::determinate(const mat3 & a)
+float andMath::determinant(const mat3 & a)
 {
-	return mat3();
+	float n = (a.m[1] * (a.m[5] * a.m[9] - a.m[6] * a.m[8]))
+			- (a.m[2] * (a.m[4] * a.m[9] - a.m[6] * a.m[7]))
+			+ (a.m[3] * (a.m[4] * a.m[8] - a.m[5] * a.m[7]));
+	return n; 
 }
 
 andMath::mat3 andMath::rotate(float a)
@@ -40,10 +50,10 @@ andMath::mat3 andMath::translate(const vec2 &a)
 {
 	mat3 n = n.identity;
 	n.mm[2][0] = a.x;
-	n.mm[2][1] = a.x;
+	n.mm[2][1] = a.y;
 	return n;
 }
-andMath::mat3 andMath::scale(const vec2 & a)
+andMath::mat3 andMath::scale(float scale)
 {
 	mat3 n = n.identity;
 	n.mm[0][0] = scale;
@@ -53,39 +63,84 @@ andMath::mat3 andMath::scale(const vec2 & a)
 
 andMath::mat3 andMath::operator+(const mat3 & lhs, const mat3 & rhs)
 {
-	return mat3();
+	mat3 n;
+	n.c[0] = lhs.c[0] + rhs.c[0];
+	n.c[1] = lhs.c[1] + rhs.c[1];
+	n.c[2] = lhs.c[2] + rhs.c[2];
+	return n;
 }
-andMath::mat3 andMath::operator+=(const mat3 & lhs, const mat3 & rhs)
+andMath::mat3 andMath::operator+=(mat3 & lhs, const mat3 & rhs)
 {
-	return mat3();
+	lhs.c[0] += rhs.c[0];
+	lhs.c[1] += rhs.c[1];
+	lhs.c[2] += rhs.c[2];
+	return lhs;
 }
 andMath::mat3 andMath::operator-(const mat3 & lhs, const mat3 & rhs)
 {
-	return mat3();
+	mat3 n;
+	n.c[0] = lhs.c[0] - rhs.c[0];
+	n.c[1] = lhs.c[1] - rhs.c[1];
+	n.c[2] = lhs.c[2] - rhs.c[2];
+	return n;
 }
-andMath::mat3 andMath::operator-=(const mat3 & lhs, const mat3 & rhs)
+andMath::mat3 andMath::operator-=(mat3 & lhs, const mat3 & rhs)
 {
-	return mat3();
-}
-
-andMath::mat3 andMath::operator*(const mat3 & lhs, const mat3 & rhs)
-{
-	return mat3();
-}
-andMath::mat3 andMath::operator*(const mat3 & lhs, const vec3 & rhs)
-{
-	return mat3();
-}
-andMath::mat3 andMath::operator*(const mat3 & lhs, float rhs)
-{
-	return mat3();
+	lhs.c[0] -= rhs.c[0];
+	lhs.c[1] -= rhs.c[1];
+	lhs.c[2] -= rhs.c[2];
+	return lhs;
 }
 
-andMath::mat3 andMath::operator*=(const mat3 & lhs, const mat3 & rhs)
+inline andMath::mat3 andMath::operator*(const mat3 & lhs, const mat3 & rhs)
 {
-	return mat3();
+	mat3 n, t = transpose(lhs);
+	n.c[0] = { dot(t.c[0], rhs.c[0]), dot(t.c[1], rhs.c[0]), dot(t.c[2], rhs.c[0]) };
+	n.c[1] = { dot(t.c[0], rhs.c[1]), dot(t.c[1], rhs.c[1]), dot(t.c[2], rhs.c[1]) };
+	n.c[2] = { dot(t.c[0], rhs.c[2]), dot(t.c[1], rhs.c[2]), dot(t.c[2], rhs.c[2]) };
+	return n;
 }
-andMath::mat3 andMath::operator*=(const mat3 & lhs, float rhs)
+inline andMath::vec3 andMath::operator*(const mat3 & lhs, const vec3 & rhs)
 {
-	return mat3();
+	mat3 t = transpose(lhs);
+	vec3 n;
+
+	n.x = dot(t.c[0], rhs);
+	n.y = dot(t.c[1], rhs);
+	n.z = dot(t.c[2], rhs);
+
+	return n;
+}
+inline andMath::mat3 andMath::operator*(const mat3 & lhs, float rhs)
+{
+	mat3 n;
+	n.c[0] = lhs.c[0] * rhs;
+	n.c[1] = lhs.c[1] * rhs;
+	n.c[2] = lhs.c[2] * rhs;
+	return n;
+}
+
+andMath::mat3 andMath::operator*=(mat3 & lhs, const mat3 & rhs)
+{
+	mat3 t = transpose(lhs);
+	t.c[0] = { dot(t.c[0], rhs.c[0]), dot(t.c[1], rhs.c[0]), dot(t.c[2], rhs.c[0]) };
+	t.c[1] = { dot(t.c[0], rhs.c[1]), dot(t.c[1], rhs.c[1]), dot(t.c[2], rhs.c[1]) };
+	t.c[2] = { dot(t.c[0], rhs.c[2]), dot(t.c[1], rhs.c[2]), dot(t.c[2], rhs.c[2]) };
+	return t;
+}
+andMath::mat3 andMath::operator*=(mat3 & lhs, float rhs)
+{
+	lhs.c[0] *= rhs;
+	lhs.c[1] *= rhs;
+	lhs.c[2] *= rhs;
+	return lhs;
+}
+
+bool andMath::operator==(const mat3 & a, const mat3 & b)
+{
+	return (a.c[0] == a.c[0] && a.c[1] == a.c[1] && a.c[2] == a.c[2])? true : false;
+}
+bool andMath::operator!=(const mat3 & a, const mat3 & b)
+{
+	return (a.c[0] != a.c[0] && a.c[1] != a.c[1] && a.c[2] != a.c[2]) ? true : false;
 }
