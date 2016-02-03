@@ -5,7 +5,7 @@
 namespace andMath {
 	__declspec(align(32)) struct mat4 {
 		union {
-			vec3 c[3];
+			vec4 c[4];
 			struct { float m[16]; };
 			struct { float mm[4][4]; };
 			struct {
@@ -24,7 +24,7 @@ namespace andMath {
 
 	mat4 rotate(const vec3 &a, float b);
 	mat4 translate(const vec3 &a);
-	mat4 scale(const vec3 &a);
+	mat4 scale(const vec3 a);
 
 	mat4 operator+	(const mat4 &lhs, const mat4 &rhs);
 	mat4 operator+=	(mat4 &lhs, const mat4 &rhs);
@@ -32,7 +32,7 @@ namespace andMath {
 	mat4 operator-=	(mat4 &lhs, const mat4 &rhs);
 
 	mat4 operator*	(const mat4 &lhs, const mat4 &rhs); //mat
-	vec3 operator*	(const mat4 &lhs, const vec3 &rhs); //vec
+	vec4 operator*	(const mat4 &lhs, const vec4 &rhs); //vec
 	mat4 operator*	(const mat4 &lhs, float rhs);		//scalar
 
 	mat4 operator*=	(mat4 &lhs, const mat4 &rhs);
