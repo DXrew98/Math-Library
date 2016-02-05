@@ -35,9 +35,13 @@ andMath::mat4 andMath::inverse(const mat4 & a)
 
 float andMath::determinant(const mat4 & a)
 {
-	float n = (a.m[1] * (a.m[5] * a.m[9] - a.m[6] * a.m[8]))
-			- (a.m[2] * (a.m[4] * a.m[9] - a.m[6] * a.m[7]))
-			+ (a.m[3] * (a.m[4] * a.m[8] - a.m[5] * a.m[7]));
+	mat3 one = { a.m[6], a.m[7], a.m[8], a.m[10], a.m[11], a.m[12], a.m[14], a.m[15], a.m[16] };
+	mat3 two = { a.m[5], a.m[7], a.m[8], a.m[9], a.m[11], a.m[13], a.m[14], a.m[15], a.m[16]  };
+	mat3 thr = { a.m[5], a.m[6], a.m[8], a.m[9], a.m[10], a.m[12], a.m[13], a.m[14], a.m[16]  };
+	mat3 fou = { a.m[5], a.m[6], a.m[7], a.m[9], a.m[10], a.m[11], a.m[13], a.m[14], a.m[15]  };
+
+	float n = a.m[1] * determinant(one) - a.m[2] * determinant(two)
+			+ a.m[3] * determinant(thr) - a.m[4] * determinant(fou);
 	return n;
 }
 

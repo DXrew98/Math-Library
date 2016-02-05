@@ -6,12 +6,13 @@ namespace andMath {
 	__declspec(align(32)) struct mat4 {
 		union {
 			vec4 c[4];
-			struct { float m[16]; };
+			struct { float m[16];    };
 			struct { float mm[4][4]; };
 			struct {
 				union { vec4 c1; vec3 rht; };
-				union { vec4 c2; vec3 up; };
-				union { vec4 c3; vec3 pos; };
+				union { vec4 c2; vec3 up;  };
+				union { vec4 c3; vec3 fwd; };
+				union { vec4 c4; vec3 pos; };
 			};
 		};
 		static constexpr mat4 identity();
