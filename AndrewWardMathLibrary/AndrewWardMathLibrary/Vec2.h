@@ -26,11 +26,16 @@ namespace andMath {
 	vec2 reflect(const vec2 &lhs, const vec2 &norm);
 	vec2 project(const vec2 &a, const vec2 &b);
 
+	vec2 min(const vec2 &a, const vec2 &b);
+	vec2 max(const vec2 &a, const vec2 &b);
+	vec2 clamp(const vec2 &a, const vec2 &min, const vec2 &max);
+
 	vec2 operator+  (const vec2 &lhs, const vec2 &rhs);
 	vec2 operator+= (vec2 &lhs, const vec2 &rhs);
 	vec2 operator-  (const vec2 &lhs, const vec2 &rhs);
 	vec2 operator-= (vec2 &lhs, const vec2 &rhs);
 
+	vec2 operator*  (const vec2 &lhs, const vec2 &rhs);
 	vec2 operator*  (const vec2 &lhs, float rhs);
 	vec2 operator*  (float rhs, const vec2 &lhs);
 	vec2 operator*= (vec2 &lhs, float rhs);

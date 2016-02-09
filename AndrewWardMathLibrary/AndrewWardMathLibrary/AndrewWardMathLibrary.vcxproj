@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionTests.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mat3.cpp" />
     <ClCompile Include="Mat4.cpp" />
@@ -128,7 +129,8 @@
     <ClCompile Include="Vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AndMath.h" />
+    <ClInclude Include="VMMath.h" />
+    <ClInclude Include="CollisionTests.h" />
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="Mat4.h" />
     <ClInclude Include="Shapes.h" />

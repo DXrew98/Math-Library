@@ -39,6 +39,24 @@
 	andMath::vec2 andMath::reflect(const vec2 &lhs, const vec2 &norm) { return 2 * (dot(lhs, norm)) * norm - lhs; }
 	andMath::vec2 andMath::project(const vec2 & a, const vec2 & b) { return dot(a, b) * b.normal(); }
 
+	andMath::vec2 andMath::min(const vec2 & a, const vec2 & b)
+	{
+		if (a < b) { return a; }
+		else       { return b; }
+	}
+
+	andMath::vec2 andMath::max(const vec2 & a, const vec2 & b)
+	{
+		if (a > b) { return a; }
+		else       { return b; }
+	}
+
+	andMath::vec2 andMath::clamp(const vec2 & a, const vec2 & min, const vec2 & max)
+	{
+		if (a > max) { return max; }
+		if (a < min) { return min; }
+	}
+
 	andMath::vec2 andMath::operator+  (const vec2 &lhs, const vec2 &rhs) {
 		vec2 c;
 		c.x = lhs.x + rhs.x;
@@ -59,6 +77,12 @@
 		return lhs = lhs - rhs;
 	}
 
+	andMath::vec2 andMath::operator*  (const vec2 &lhs, const vec2 &rhs) {
+		vec2 c;
+		c.x = lhs.x * rhs.x;
+		c.y = lhs.y * rhs.y;
+		return  c;
+	}
 	andMath::vec2 andMath::operator*  (const vec2 &lhs, float rhs) {
 		vec2 c;
 		c.x = lhs.x * rhs;

@@ -3,6 +3,7 @@
 #include "Vec2.h"
 #include "Vec3.h"
 #include "Vec4.h"
+#include "VMMath.h"
 
 
 void vec2Tests() {
@@ -346,6 +347,7 @@ int main() {
 	vec2Tests();
 	vec3Tests();
 	vec4Tests();
+	
 
 	system("pause");
 	return 0;
