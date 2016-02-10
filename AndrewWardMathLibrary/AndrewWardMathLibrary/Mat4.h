@@ -15,7 +15,7 @@ namespace andMath {
 				union { vec4 c4; vec3 pos; };
 			};
 		};
-		static constexpr mat4 identity();
+		static mat4 identity();
 	};
 
 	mat4 transpose(const mat4 &a);
@@ -25,7 +25,7 @@ namespace andMath {
 
 	mat4 rotate(const vec3 &a, float b);
 	mat4 translate(const vec3 &a);
-	mat4 scale(const vec3 a);
+	mat4 scale(const vec3 &a);
 
 	mat4 operator+	(const mat4 &lhs, const mat4 &rhs);
 	mat4 operator+=	(mat4 &lhs, const mat4 &rhs);

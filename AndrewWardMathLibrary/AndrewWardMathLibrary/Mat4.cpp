@@ -1,6 +1,6 @@
 #include "Mat4.h"
 
-constexpr andMath::mat4 andMath::mat4::identity()
+andMath::mat4 andMath::mat4::identity()
 {
 	mat4 n;
 	n.c[0] = { 1, 0, 0, 0 };
@@ -63,15 +63,15 @@ andMath::mat4 andMath::rotate(const vec3 &normalizedVec3, float angle)
 }
 andMath::mat4 andMath::translate(const vec3 &translation)
 {
-	mat4 n = n.identity;
+	mat4 n = n.identity();
 	n.mm[3][0] = translation.x;
 	n.mm[3][1] = translation.y;
 	n.mm[3][2] = translation.z;
 	return n;
 }
-andMath::mat4 andMath::scale(const vec3 scale)
+andMath::mat4 andMath::scale(const vec3 &scale)
 {
-	mat4 n = n.identity;
+	mat4 n = n.identity();
 	n.mm[0][0] = scale.x;
 	n.mm[1][1] = scale.y;
 	n.mm[2][2] = scale.z;
@@ -191,7 +191,7 @@ andMath::mat4 andMath::ortho(float left, float right, float bottom, float top, f
 	nM.m[13] = (t + b) * bt;
 	nM.m[14] = (n + f) * nf;
 
-	return nM);
+	return nM;
 }
 
 andMath::mat4 andMath::frustum(float left, float right, float bottom, float top, float near, float far)

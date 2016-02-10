@@ -1,10 +1,9 @@
 #include <cassert>
 #include <iostream>
-#include "Vec2.h"
-#include "Vec3.h"
-#include "Vec4.h"
 #include "VMMath.h"
 
+
+using andMath::vec2;
 
 void vec2Tests() {
 	//new vectors to test with
@@ -343,11 +342,73 @@ void vec4Tests() {
 
 }
 
+void mat3Tests() {
+
+	andMath::mat3 a = { 1, 1, 1,
+					    1, 1, 1,
+					    1, 1, 1 };
+	andMath::mat3 b = { 2, 2, 2,
+						2, 2, 2,
+						2, 2, 2 };
+
+	a = a.identity();
+	b = b.identity();
+
+	assert(a == b);
+
+	a = { 1, 2, 3,
+		  4, 5, 6,
+		  7, 8, 9 };
+	b = { 1, 4, 7,
+		  2, 5, 8,
+		  3, 6, 9 };
+
+	a = andMath::transpose(a);
+	assert(a == b);
+
+	a = { 2, 2, 3,
+		  4, 5, 6,
+		  7, 8, 9 };
+	b = { 1, 4, 7,
+		  2, 5, 8,
+		  3, 6, 9 };
+
+	assert(a * andMath::mat3::identity() == a);
+	
+	assert(fabs(andMath::determinant(b)) < FLT_EPSILON);
+
+	//assert((a * andMath::inverse(a)) == a.identity());
+
+	a = { 1, 1, 1,
+		1, 1, 1,
+		1, 1, 1 };
+	b = { 2, 2, 2,
+		2, 2, 2,
+		2, 2, 2 };
+	andMath::mat3 d = { 1, 1, 1,
+		1, 1, 1,
+		1, 1, 1 };
+	a = a + a;
+	assert(a == b);
+	a = a - d;
+	assert(a == d);
+	d += b;
+	a = a * a;
+	assert(a == d);
+	a = { 1, 1, 1,
+		1, 1, 1,
+		1, 1, 1 };
+	a *= a;
+	assert(a == d);
+}
 int main() {
 	vec2Tests();
 	vec3Tests();
 	vec4Tests();
+	mat3Tests();
 	
+
+
 
 	system("pause");
 	return 0;

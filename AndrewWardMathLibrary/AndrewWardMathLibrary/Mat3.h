@@ -7,7 +7,7 @@
 #define PI 3.141592654;
 
 namespace andMath {
-	__declspec(align(32)) struct mat3{
+	/*__declspec(align(32))*/ struct mat3{
 		union{
 			vec3 c[3];
 			struct { float m[9]; };
@@ -18,7 +18,7 @@ namespace andMath {
 				union { vec3 c3; vec2 pos; };
 			};
 		};
-		static constexpr mat3 identity();
+		static mat3 identity();
 	};
 
 	mat3 transpose	(const mat3 &a);
