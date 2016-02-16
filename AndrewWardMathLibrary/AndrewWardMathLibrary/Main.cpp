@@ -386,8 +386,8 @@ void mat3Tests() {
 		2, 2, 2,
 		2, 2, 2 };
 	andMath::mat3 d = { 1, 1, 1,
-		1, 1, 1,
-		1, 1, 1 };
+						1, 1, 1,
+						1, 1, 1 };
 	a = a + a;
 	assert(a == b);
 	a = a - d;
@@ -400,6 +400,36 @@ void mat3Tests() {
 		1, 1, 1 };
 	a *= a;
 	assert(a == d);
+	a = { 1, 1, 1,
+		  1, 1, 1,
+		  1, 1, 1 };
+
+	d = { 1, 1, 1,
+		  1, 1, 1,
+		  1, 1, 1 };
+
+	a += d;
+	assert(a == b);
+	a -= d;
+	assert(a == d);
+
+
+	a = a * 2;
+	assert(a == b);
+
+	d *= 2;
+	assert(d == b);
+
+	a = { 0, 0, 0,
+		  0, 0, 0,
+		  0, 0, 0 };
+	b = { 0, -1, 0,
+		  1,  0, 0,
+		  0,  0, 1 };
+	a *= andMath::rotate(90);
+	assert(a == b);
+
+
 }
 int main() {
 	vec2Tests();

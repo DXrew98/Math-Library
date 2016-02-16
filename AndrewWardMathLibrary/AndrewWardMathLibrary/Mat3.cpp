@@ -50,7 +50,7 @@ float andMath::determinant(const mat3 & a)
 
 andMath::mat3 andMath::rotate(float a)
 {
-	mat3 n;
+	mat3 n = n.identity();
 	n.c[0] = { cosf(a), sinf(a), 0 };
 	n.c[1] = { -sinf(a), cosf(a), 0 };
 	return n;
@@ -67,7 +67,7 @@ andMath::mat3 andMath::scale(float scale)
 	mat3 n = n.identity();
 	n.mm[0][0] = scale;
 	n.mm[1][1] = scale;
-	return mat3();
+	return n;
 }
 
 andMath::mat3 andMath::operator+(const mat3 & lhs, const mat3 & rhs)
