@@ -345,8 +345,8 @@ void vec4Tests() {
 void mat3Tests() {
 
 	andMath::mat3 a = { 1, 1, 1,
-					    1, 1, 1,
-					    1, 1, 1 };
+						1, 1, 1,
+						1, 1, 1 };
 	andMath::mat3 b = { 2, 2, 2,
 						2, 2, 2,
 						2, 2, 2 };
@@ -374,11 +374,12 @@ void mat3Tests() {
 		  3, 6, 9 };
 
 	assert(a * andMath::mat3::identity() == a);
-	
+
 	assert(fabs(andMath::determinant(b)) < FLT_EPSILON);
 
-	andMath::mat3 inverseReturn = (andMath::inverse(a) * a); 
+	andMath::mat3 inverseReturn = (a * andMath::inverse(a));
 	assert(inverseReturn == a.identity());
+
 
 	a = { 1, 1, 1,
 		1, 1, 1,
