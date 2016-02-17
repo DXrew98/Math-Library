@@ -377,7 +377,8 @@ void mat3Tests() {
 	
 	assert(fabs(andMath::determinant(b)) < FLT_EPSILON);
 
-	//assert((a * andMath::inverse(a)) == a.identity());
+	andMath::mat3 inverseReturn = (a * andMath::inverse(a)); 
+	assert(inverseReturn == a.identity());
 
 	a = { 1, 1, 1,
 		1, 1, 1,
@@ -420,14 +421,38 @@ void mat3Tests() {
 	d *= 2;
 	assert(d == b);
 
-	a = { 0, 0, 0,
-		  0, 0, 0,
-		  0, 0, 0 };
-	b = { 0, -1, 0,
-		  1,  0, 0,
-		  0,  0, 1 };
+	a = { 1, 0, 0,
+		  0, 1, 0,
+		  1, 0, 1 };
+	b = { 0, 1, 0,
+		  -1, 0, 0,
+		  1, 0, 1 };
 	a *= andMath::rotate(90);
 	assert(a == b);
+
+	// starting position
+	andMath::vec3 start = { 1, 1, 1 };
+	andMath::vec2 v = { 1, 1 };
+	andMath::mat3 translationMatrix = andMath::translate(v);
+	andMath::vec3 end = { 2, 2, 1 };
+
+
+	a = { 1, 0, 1,
+		  0, 1, 1,
+		  0, 0, 1 };
+	b = { 1, 0, 1,
+		  0, 1, 1,
+		  0, 0, 1 };
+	a *= andMath::translate(v);
+	assert(translationMatrix * start == end);
+
+	a = { 2, 0, 0,
+		  0, 1, 0,
+		  0, 0, 1 };
+	v = { 2, 1 };
+	andMath::vec3 end2 = { 2, 1, 1 };
+	andMath::mat3 scaleMatrix = andMath::scale(v);
+	assert(scaleMatrix * start == end2);
 
 
 }

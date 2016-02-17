@@ -4,7 +4,8 @@
 #include <cfloat>
 #include <cmath>
 
-#define PI 3.141592654;
+#define PI 3.141592654f
+#define DEGtoRAD PI / 180.0f
 
 namespace andMath {
 	/*__declspec(align(32))*/ struct mat3{
@@ -28,7 +29,7 @@ namespace andMath {
 
 	mat3 rotate		(float a);
 	mat3 translate	(const vec2 &a);
-	mat3 scale		(float scale);
+	mat3 scale		(const vec2 scale);
 
 	mat3 operator+	(const mat3 &lhs, const mat3 &rhs);
 	mat3 operator+=	(mat3 &lhs, const mat3 &rhs);
