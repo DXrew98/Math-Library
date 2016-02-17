@@ -377,7 +377,7 @@ void mat3Tests() {
 	
 	assert(fabs(andMath::determinant(b)) < FLT_EPSILON);
 
-	andMath::mat3 inverseReturn = (a * andMath::inverse(a)); 
+	andMath::mat3 inverseReturn = (andMath::inverse(a) * a); 
 	assert(inverseReturn == a.identity());
 
 	a = { 1, 1, 1,
