@@ -457,12 +457,89 @@ void mat3Tests() {
 
 
 }
+
+void mat4Tests() {
+	andMath::mat4 a = { 1, 1, 1, 1,
+						1, 1, 1, 1,
+						1, 1, 1, 1, 
+						1, 1, 1, 1};
+	andMath::mat4 b = { 1, 1, 1, 1,
+						1, 1, 1, 1,
+						1, 1, 1, 1,
+						1, 1, 1, 1 };
+	andMath::mat4 c = { 2, 2, 2, 2,
+						2, 2, 2, 2,
+						2, 2, 2, 2,
+						2, 2, 2, 2 };
+	andMath::mat4 d;
+	andMath::mat4 e = { 16, 16, 16, 16,
+						16, 16, 16, 16,
+						16, 16, 16, 16,
+						16, 16, 16, 16 };
+
+	andMath::mat4 f = {  1,  2,  3,  4,
+						 5,  6,  7,  8,
+						 9, 10, 11, 12,
+						13, 14, 15, 16 };
+
+	andMath::mat4 g = { 1,  5,  9, 13,
+						2,  6, 10, 14,
+						3,  7, 11, 15,
+					    4,  8, 12, 16 };
+
+	
+	assert(a == b);
+	assert(a != c);
+
+	d = a + b;
+	assert(d == c);
+	d = d - b;
+	assert(d == b);
+	d += a;
+	assert(d == c);
+	d -= b;
+	assert(d == b);
+
+	f = andMath::transpose(f);
+	assert(f == g);
+
+	d = c * c;
+	assert(d == e);
+	d = c;
+	d *= c;
+	assert(d == e);
+
+	andMath::vec4 vA = { 2, 2, 2, 2 };
+	andMath::vec4 vB;
+	andMath::vec4 vC = { 16, 16, 16, 16 };
+	d = c;
+	vB = d * vA;
+	assert(vB == vC);
+	vB = vA;
+
+	d = a;
+	d = d * 2;
+	assert(d == c);
+	d = a;
+	d *= 2;
+	assert(d == c);
+
+
+	andMath::mat4 h = { 2,  2,  3,  4,
+						4,  3,  2,  2,
+						7,  8,  9,  0,
+						1,  2,  3,  4 };
+	assert(fabs(andMath::determinant(f)) < FLT_EPSILON);
+	assert(fabs(andMath::determinant(h) - 56.0f) < FLT_EPSILON);
+
+}
+
 int main() {
 	vec2Tests();
 	vec3Tests();
 	vec4Tests();
 	mat3Tests();
-	
+	mat4Tests();
 
 
 

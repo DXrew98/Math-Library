@@ -19,6 +19,8 @@ andMath::mat3 andMath::transpose(const mat3 & a)
 }
 andMath::mat3 andMath::inverse(const mat3 & a)
 {
+
+	//lots of help form jacob
 	mat3 n;
 	//mat3 mC = {  1, -1, 1, -1, 1, -1, 1, -1, 1  };
 

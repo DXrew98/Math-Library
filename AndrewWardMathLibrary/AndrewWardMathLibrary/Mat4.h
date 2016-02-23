@@ -3,11 +3,11 @@
 #include "mat3.h"
 
 namespace andMath {
-	__declspec(align(32)) struct mat4 {
+struct mat4 {
 		union {
 			vec4 c[4];
-			struct { float m[16];    };
-			struct { float mm[4][4]; };
+			float m[16];
+			float mm[4][4];
 			struct {
 				union { vec4 c1; vec3 rht; };
 				union { vec4 c2; vec3 up;  };

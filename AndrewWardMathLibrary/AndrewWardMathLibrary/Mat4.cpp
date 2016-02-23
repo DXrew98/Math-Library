@@ -13,10 +13,10 @@ andMath::mat4 andMath::mat4::identity()
 andMath::mat4 andMath::transpose(const mat4 & a)
 {
 	mat4 n;
-	n.c[0] = { a.mm[0][0], a.mm[1][0], a.mm[2][0], a.mm[3][0] };
-	n.c[1] = { a.mm[0][1], a.mm[1][1], a.mm[2][1], a.mm[3][1] };
-	n.c[2] = { a.mm[0][2], a.mm[1][2], a.mm[2][2], a.mm[3][2] };
-	n.c[3] = { a.mm[0][3], a.mm[1][3], a.mm[2][3], a.mm[3][3] };
+	n.c[0] = vec4{ a.mm[0][0], a.mm[1][0], a.mm[2][0], a.mm[3][0] };
+	n.c[1] = vec4{ a.mm[0][1], a.mm[1][1], a.mm[2][1], a.mm[3][1] };
+	n.c[2] = vec4{ a.mm[0][2], a.mm[1][2], a.mm[2][2], a.mm[3][2] };
+	n.c[3] = vec4{ a.mm[0][3], a.mm[1][3], a.mm[2][3], a.mm[3][3] };
 	return n;
 }
 andMath::mat4 andMath::inverse(const mat4 & a)
@@ -35,13 +35,15 @@ andMath::mat4 andMath::inverse(const mat4 & a)
 
 float andMath::determinant(const mat4 & a)
 {
-	mat3 one = { a.m[6], a.m[7], a.m[8], a.m[10], a.m[11], a.m[12], a.m[14], a.m[15], a.m[16] };
-	mat3 two = { a.m[5], a.m[7], a.m[8], a.m[9], a.m[11], a.m[13], a.m[14], a.m[15], a.m[16]  };
-	mat3 thr = { a.m[5], a.m[6], a.m[8], a.m[9], a.m[10], a.m[12], a.m[13], a.m[14], a.m[16]  };
-	mat3 fou = { a.m[5], a.m[6], a.m[7], a.m[9], a.m[10], a.m[11], a.m[13], a.m[14], a.m[15]  };
-
-	float n = a.m[1] * determinant(one) - a.m[2] * determinant(two)
-			+ a.m[3] * determinant(thr) - a.m[4] * determinant(fou);
+	float n =	a.mm[0][0] * a.mm[1][1] * a.mm[2][2] * a.mm[3][3] + a.mm[0][0] * a.mm[1][2] * a.mm[2][3] * a.mm[3][1] + a.mm[0][0] * a.mm[1][3] * a.mm[2][1] * a.mm[3][2] +
+				a.mm[0][1] * a.mm[1][0] * a.mm[2][3] * a.mm[3][2] + a.mm[0][1] * a.mm[1][2] * a.mm[2][0] * a.mm[3][3] + a.mm[0][1] * a.mm[1][3] * a.mm[2][2] * a.mm[3][0] +
+				a.mm[0][2] * a.mm[1][0] * a.mm[2][1] * a.mm[3][3] + a.mm[0][2] * a.mm[1][1] * a.mm[2][3] * a.mm[3][0] + a.mm[0][2] * a.mm[1][3] * a.mm[2][0] * a.mm[3][1] +
+				a.mm[0][3] * a.mm[1][0] * a.mm[2][2] * a.mm[3][1] + a.mm[0][3] * a.mm[1][1] * a.mm[2][0] * a.mm[3][2] + a.mm[0][3] * a.mm[1][2] * a.mm[2][1] * a.mm[3][0] -
+				//-
+				a.mm[0][0] * a.mm[1][1] * a.mm[2][3] * a.mm[3][2] - a.mm[0][0] * a.mm[1][2] * a.mm[2][1] * a.mm[3][3] - a.mm[0][0] * a.mm[1][3] * a.mm[2][2] * a.mm[3][1] -
+				a.mm[0][1] * a.mm[1][0] * a.mm[2][2] * a.mm[3][3] - a.mm[0][1] * a.mm[1][2] * a.mm[2][3] * a.mm[3][0] - a.mm[0][1] * a.mm[1][3] * a.mm[2][0] * a.mm[3][2] -
+				a.mm[0][2] * a.mm[1][0] * a.mm[2][3] * a.mm[3][1] - a.mm[0][2] * a.mm[1][1] * a.mm[2][0] * a.mm[3][3] - a.mm[0][2] * a.mm[1][3] * a.mm[2][1] * a.mm[3][0] -
+				a.mm[0][3] * a.mm[1][0] * a.mm[2][1] * a.mm[3][2] - a.mm[0][3] * a.mm[1][1] * a.mm[2][2] * a.mm[3][0] - a.mm[0][3] * a.mm[1][2] * a.mm[2][0] * a.mm[3][1];
 	return n;
 }
 
@@ -113,7 +115,7 @@ andMath::mat4 andMath::operator-=(mat4 & lhs, const mat4 & rhs)
 	return lhs;
 }
 
-inline andMath::mat4 andMath::operator*(const mat4 & lhs, const mat4 & rhs)
+andMath::mat4 andMath::operator*(const mat4 & lhs, const mat4 & rhs)
 {
 	mat4 n, t = transpose(lhs);
 	n.c[0] = { dot(t.c[0], rhs.c[0]), dot(t.c[1], rhs.c[0]), dot(t.c[2], rhs.c[0]),  dot(t.c[3], rhs.c[0]) };
@@ -122,7 +124,7 @@ inline andMath::mat4 andMath::operator*(const mat4 & lhs, const mat4 & rhs)
 	n.c[3] = { dot(t.c[0], rhs.c[3]), dot(t.c[1], rhs.c[3]), dot(t.c[2], rhs.c[3]),  dot(t.c[3], rhs.c[3]) };
 	return n;
 }
-inline andMath::vec4 andMath::operator*(const mat4 & lhs, const vec4 & rhs)
+andMath::vec4 andMath::operator*(const mat4 & lhs, const vec4 & rhs)
 {
 	mat4 t = transpose(lhs);
 	vec4 n;
@@ -130,11 +132,11 @@ inline andMath::vec4 andMath::operator*(const mat4 & lhs, const vec4 & rhs)
 	n.x = dot(t.c[0], rhs);
 	n.y = dot(t.c[1], rhs);
 	n.z = dot(t.c[2], rhs);
-	n.z = dot(t.c[3], rhs);
+	n.w = dot(t.c[3], rhs);
 
 	return n;
 }
-inline andMath::mat4 andMath::operator*(const mat4 & lhs, float rhs)
+andMath::mat4 andMath::operator*(const mat4 & lhs, float rhs)
 {
 	mat4 n;
 	n.c[0] = lhs.c[0] * rhs;
@@ -146,12 +148,8 @@ inline andMath::mat4 andMath::operator*(const mat4 & lhs, float rhs)
 
 andMath::mat4 andMath::operator*=(mat4 & lhs, const mat4 & rhs)
 {
-	mat4 t = transpose(lhs);
-	t.c[0] = { dot(t.c[0], rhs.c[0]), dot(t.c[1], rhs.c[0]), dot(t.c[2], rhs.c[0]),  dot(t.c[3], rhs.c[0]) };
-	t.c[1] = { dot(t.c[0], rhs.c[1]), dot(t.c[1], rhs.c[1]), dot(t.c[2], rhs.c[1]),  dot(t.c[3], rhs.c[1]) };
-	t.c[2] = { dot(t.c[0], rhs.c[2]), dot(t.c[1], rhs.c[2]), dot(t.c[2], rhs.c[2]),  dot(t.c[3], rhs.c[2]) };
-	t.c[2] = { dot(t.c[0], rhs.c[3]), dot(t.c[1], rhs.c[3]), dot(t.c[2], rhs.c[3]),  dot(t.c[3], rhs.c[3]) };
-	return t;
+	lhs = lhs * rhs;
+	return lhs;
 }
 andMath::mat4 andMath::operator*=(mat4 & lhs, float rhs)
 {
@@ -164,11 +162,11 @@ andMath::mat4 andMath::operator*=(mat4 & lhs, float rhs)
 
 bool andMath::operator==(const mat4 & a, const mat4 & b)
 {
-	return (a.c[0] == a.c[0] && a.c[1] == a.c[1] && a.c[2] == a.c[2] && a.c[3] == a.c[3]) ? true : false;
+	return (a.c[0] == b.c[0] && a.c[1] == b.c[1] && a.c[2] == b.c[2] && a.c[3] == b.c[3]) ? true : false;
 }
 bool andMath::operator!=(const mat4 & a, const mat4 & b)
 {
-	return (a.c[0] != a.c[0] && a.c[1] != a.c[1] && a.c[2] != a.c[2] && a.c[3] != a.c[3]) ? true : false;
+	return (a.c[0] != b.c[0] && a.c[1] != b.c[1] && a.c[2] != b.c[2] && a.c[3] != b.c[3]) ? true : false;
 }
 
 andMath::mat4 andMath::ortho(float left, float right, float bottom, float top, float near, float far)

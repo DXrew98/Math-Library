@@ -6,7 +6,7 @@
 
 //FLT_EPSILON
 namespace andMath {
-__declspec(align(32))struct vec4 {
+struct vec4 {
 		union {
 			float v[4];
 			struct { float x, y, z, w; };
