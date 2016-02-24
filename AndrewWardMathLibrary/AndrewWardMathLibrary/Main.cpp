@@ -532,6 +532,15 @@ void mat4Tests() {
 	assert(fabs(andMath::determinant(f)) < FLT_EPSILON);
 	assert(fabs(andMath::determinant(h) - 56.0f) < FLT_EPSILON);
 
+			      h = { 1, 1, 1, 0,
+						0, 3, 1, 2,
+						2, 3, 1, 0,
+						1, 0, 2, 1 };
+
+	andMath::mat4 inverseReturn = andMath::inverse(h);
+	inverseReturn = inverseReturn * h;
+	assert(inverseReturn == h.identity());
+
 }
 
 int main() {

@@ -1,4 +1,4 @@
-#include "vec4.h"
+#include "vmmath.h"
 
 float andMath::vec4::mag()		const { return sqrtf(x * x + y * y + z * z + w * w); }
 andMath::vec4 andMath::vec4::normal()	const {
@@ -101,10 +101,10 @@ andMath::vec4 andMath::operator/= (float rhs, vec4 &lhs) {
 	return lhs = lhs / rhs;
 }
 
-bool andMath::operator== (const vec4 &lhs, const vec4 &rhs) { return (fabs(lhs.x - rhs.x) < FLT_EPSILON && fabs(lhs.y - rhs.y) < FLT_EPSILON) 
-																&& fabs(lhs.z - rhs.z) < FLT_EPSILON && fabs(lhs.w - rhs.w) < FLT_EPSILON; }
-bool andMath::operator!= (const vec4 &lhs, const vec4 &rhs) { return !(fabs(lhs.x - rhs.x) < FLT_EPSILON && !(fabs(lhs.y - rhs.y)) < FLT_EPSILON)
-																&& !(fabs(lhs.z - rhs.z)) < FLT_EPSILON && !(fabs(lhs.w - rhs.w)) < FLT_EPSILON; }
+bool andMath::operator== (const vec4 &lhs, const vec4 &rhs) { return (fabs(lhs.x - rhs.x) < FLT_EPSILON && fabs(lhs.y - rhs.y) < FLT_EPSILON 
+																&& fabs(lhs.z - rhs.z) < FLT_EPSILON && fabs(lhs.w - rhs.w) < FLT_EPSILON); }
+bool andMath::operator!= (const vec4 &lhs, const vec4 &rhs) { return !(fabs(lhs.x - rhs.x) < FLT_EPSILON) && !(fabs(lhs.y - rhs.y) < FLT_EPSILON)
+																&& !(fabs(lhs.z - rhs.z) < FLT_EPSILON) && !(fabs(lhs.w - rhs.w) < FLT_EPSILON); }
 
 bool andMath::operator<  (const vec4 &lhs, const vec4 &rhs) { return lhs.mag() < rhs.mag(); }
 bool andMath::operator<= (const vec4 &lhs, const vec4 &rhs) { return lhs.mag() < rhs.mag() || fabs(lhs.mag() - rhs.mag()) < FLT_EPSILON; }

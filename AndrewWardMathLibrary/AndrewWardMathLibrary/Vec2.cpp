@@ -1,4 +1,4 @@
-#include "Vec2.h"
+#include "vmmath.h"
 
 		andMath::vec2 andMath::vec2::fromAngle(float angle) {
 			vec2 c;

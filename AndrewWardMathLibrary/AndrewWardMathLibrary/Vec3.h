@@ -1,9 +1,4 @@
 #pragma once
-#include <cfloat>
-#include <cmath>
-
-#define PI 3.141592654
-#define DEGtoRAD PI / 180.0f
 
 //FLT_EPSILON
 namespace andMath {

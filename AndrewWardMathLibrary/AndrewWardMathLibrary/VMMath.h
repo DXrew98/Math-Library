@@ -1,7 +1,16 @@
 #pragma once
+
+#include <cfloat>
+#include <cmath>
 #include "Vec2.h"
 #include "Vec3.h"
 #include "Vec4.h"
+#include "Mat2.h"
 #include "Mat3.h"
 #include "Mat4.h"
 #include "Shapes.h"
+#include "CollisionTests.h"
+
+#define PI 3.141592654
+#define DEGtoRAD PI / 180.0f
+#define FLT_EPSILON 0.00001

@@ -1,4 +1,4 @@
-#include "Mat3.h"
+#include "vmmath.h"
 
 andMath::mat3 andMath::mat3::identity()
 {
@@ -148,7 +148,7 @@ andMath::mat3 andMath::operator*=(mat3 & lhs, float rhs)
 
 bool andMath::operator==(const mat3 & a, const mat3 & b)
 {
-	return ((a.c[0] == b.c[0] && a.c[1] == b.c[1] && a.c[2] == b.c[2])? true : false);
+	return (a.c[0] == b.c[0] && a.c[1] == b.c[1] && a.c[2] == b.c[2])? true : false;
 }
 bool andMath::operator!=(const mat3 & a, const mat3 & b)
 {

@@ -1,4 +1,5 @@
 #pragma once
+#include "Mat2.h"
 #include "vec4.h"
 #include "mat3.h"
 
@@ -16,7 +17,10 @@ struct mat4 {
 			};
 		};
 		static mat4 identity();
+		void setBLock2x2(int row, int col, mat2 a);
+		mat2 getBlock2x2(int row, int col) const;
 	};
+	
 
 	mat4 transpose(const mat4 &a);
 	mat4 inverse(const mat4 &a);

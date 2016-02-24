@@ -1,4 +1,5 @@
-#include "vec3.h"
+#include "vmmath.h"
+
 
 // shoot a vector for a determined angle
 float andMath::vec3::mag()		const { return sqrtf(x * x + y * y + z * z); }
@@ -100,8 +101,8 @@ andMath::vec3 andMath::operator/= (float rhs, vec3 &lhs) {
 	return lhs = lhs / rhs; 
 }
 
-bool andMath::operator== (const vec3 &lhs, const vec3 &rhs) { return (fabs(lhs.x - rhs.x) < FLT_EPSILON && fabs(lhs.y - rhs.y) < FLT_EPSILON) && fabs(lhs.z - rhs.z) < FLT_EPSILON; }
-bool andMath::operator!= (const vec3 &lhs, const vec3 &rhs) { return !(fabs(lhs.x - rhs.x) < FLT_EPSILON && !(fabs(lhs.y - rhs.y)) < FLT_EPSILON) && !(fabs(lhs.z - rhs.z)) < FLT_EPSILON; }
+bool andMath::operator== (const vec3 &lhs, const vec3 &rhs) { return (fabs(lhs.x - rhs.x) < FLT_EPSILON && fabs(lhs.y - rhs.y) < FLT_EPSILON && fabs(lhs.z - rhs.z) < FLT_EPSILON); }
+bool andMath::operator!= (const vec3 &lhs, const vec3 &rhs) { return !(fabs(lhs.x - rhs.x) < FLT_EPSILON) && !(fabs(lhs.y - rhs.y) < FLT_EPSILON) && !(fabs(lhs.z - rhs.z) < FLT_EPSILON); }
 
 bool andMath::operator<  (const vec3 &lhs, const vec3 &rhs) { return lhs.mag() < rhs.mag(); }
 bool andMath::operator<= (const vec3 &lhs, const vec3 &rhs) { return lhs.mag() < rhs.mag() || fabs(lhs.mag() - rhs.mag()) < FLT_EPSILON; }

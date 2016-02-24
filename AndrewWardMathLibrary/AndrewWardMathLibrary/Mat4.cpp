@@ -1,4 +1,4 @@
-#include "Mat4.h"
+#include "vmmath.h"
 
 andMath::mat4 andMath::mat4::identity()
 {
@@ -9,6 +9,24 @@ andMath::mat4 andMath::mat4::identity()
 	n.c[3] = { 0, 0, 0, 1 };
 	return n;
 }
+
+void andMath::mat4::setBLock2x2(int row, int col, mat2 a)
+{
+	for (int i = 0; i < 2; ++i)
+		for (int j = 0; j < 2; ++j)
+			mm[i + col][j + row] = a.mm[i][j];
+}
+
+andMath::mat2 andMath::mat4::getBlock2x2(int row, int col) const
+{
+	
+	mat2 n;
+	for (int i = 0; i < 2; ++i)
+		for (int j = 0; j < 2; ++j)
+			n.mm[i][j] = mm[i + col][j + row];
+	return n;
+}
+
 
 andMath::mat4 andMath::transpose(const mat4 & a)
 {
@@ -21,16 +39,30 @@ andMath::mat4 andMath::transpose(const mat4 & a)
 }
 andMath::mat4 andMath::inverse(const mat4 & a)
 {
+	mat2 A = a.getBlock2x2(0, 0); //andMath::getBlock2x2(a.mm[0][0], a.mm[0][0]);
+	mat2 B = a.getBlock2x2(0, 2); //andMath::getBlock2x2(a.mm[0][0], a.mm[0][2]);
+	mat2 C = a.getBlock2x2(2, 0); //andMath::getBlock2x2(a.mm[2][0], a.mm[0][0]);
+	mat2 D = a.getBlock2x2(2, 2); //andMath::getBlock2x2(a.mm[2][2], a.mm[2][2]);
+
+	mat2 ai = andMath::inverse(A);
+	mat2 ca = C * ai;
+	mat2 ab = ai * B;
+
+	mat2 dcab = andMath::inverse((D - ca * B));
+
+	mat2 nA = ai + ab *		  dcab		 * ca;
+	mat2 nB =	  (ab * -1) * dcab;
+	mat2 nC =				 (dcab * -1) * ca;
+	mat2 nD =				  dcab;
+
 	mat4 n;
-	mat4 mC = { 1, -1, 1, -1, 1, -1, 1, -1, 1 };
 
-	n.c[0] = { a.m[5] * a.m[9] - a.m[6] * a.m[8], a.m[4] * a.m[9] - a.m[6] * a.m[7], a.m[4] * a.m[8] - a.m[5] * a.m[7] };
-	n.c[1] = { a.m[2] * a.m[9] - a.m[3] * a.m[8], a.m[1] * a.m[9] - a.m[3] * a.m[7], a.m[1] * a.m[8] - a.m[2] * a.m[7] };
-	n.c[2] = { a.m[2] * a.m[6] - a.m[3] * a.m[5], a.m[1] * a.m[6] - a.m[3] * a.m[4], a.m[1] * a.m[5] - a.m[2] * a.m[4] };
+	n.setBLock2x2(0, 0, nA);
+	n.setBLock2x2(0, 2, nB);
+	n.setBLock2x2(2, 0, nC);
+	n.setBLock2x2(2, 2, nD);
 
-	n *= mC;
-
-	return (transpose(n) * (1 / determinant(n)));
+	return n;
 }
 
 float andMath::determinant(const mat4 & a)

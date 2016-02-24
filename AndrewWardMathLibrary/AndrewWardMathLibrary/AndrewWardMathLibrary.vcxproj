@@ -122,6 +122,7 @@
   <ItemGroup>
     <ClCompile Include="CollisionTests.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mat2.cpp" />
     <ClCompile Include="Mat3.cpp" />
     <ClCompile Include="Mat4.cpp" />
     <ClCompile Include="Shapes.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="Vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Mat2.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="VMMath.h" />
     <ClInclude Include="CollisionTests.h" />

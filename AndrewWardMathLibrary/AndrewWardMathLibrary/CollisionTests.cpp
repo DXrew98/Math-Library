@@ -1,5 +1,4 @@
-#include "CollisionTests.h"
-#include <cmath>
+#include "vmmath.h"
 
 //float andMath::pointPlaneDistance(const Circle &circle, const Plane & plane)
 //{
