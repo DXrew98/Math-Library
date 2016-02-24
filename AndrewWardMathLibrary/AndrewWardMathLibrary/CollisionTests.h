@@ -15,7 +15,7 @@ float pointPlaneDistance(const Circle &circle,	const Plane   &plane);
 float rayPlaneDistance	(const Ray   &ray,		const Plane   &plane);
 
 //basic tests 
-CollisionData iTest(const AABB		 &rectA,		const AABB     &rectb);
+CollisionData iTest(const AABB		 &rectA,	const AABB     &rectb);
 CollisionData iTest(const AABB		 &rect,		const Circle   &circle);
 CollisionData iTest(const AABB		 &rect,		const Ray      &ray);
 CollisionData iTest(const AABB		 &rect,		const Plane    &plane);

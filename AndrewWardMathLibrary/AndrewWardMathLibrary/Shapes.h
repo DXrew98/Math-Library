@@ -10,8 +10,7 @@ struct ConvexHull { vec2 verts; };
 struct Ray		{ vec2 pos, dir; float len; };
 struct Plane	{ vec2 pos, normal; };
 struct Circle	{ vec2 pos; float radius; };
-struct AABB		{ vec2 pos, halfPoint; 
-					vec2 min() const, max() const;};
+struct AABB		{ vec2 pos, halfPoint; vec2 min() const, max() const;};
 
 inline vec2 AABB::min() const { return pos - halfPoint; }
 inline vec2 AABB::max() const { return pos + halfPoint; }
