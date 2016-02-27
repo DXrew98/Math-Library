@@ -10,6 +10,7 @@
 #include "Mat4.h"
 #include "Shapes.h"
 #include "CollisionTests.h"
+#include "Dependancies.h"
 
 #define PI 3.141592654
 #define DEGtoRAD PI / 180.0f

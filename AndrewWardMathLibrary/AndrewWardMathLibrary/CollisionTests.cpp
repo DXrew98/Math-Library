@@ -50,7 +50,14 @@ CollisionData iTest(const Circle & circleA, const Circle & circleB)
 }
 CollisionData iTest(const Circle & circle, const Ray & ray)
 {
-	return CollisionData();
+	CollisionData cd = { false };
+	float crDis = dot(circle.pos, ray.pos);
+
+	float clampedPoint = clamp(crDis, 0, ray.len);
+	vec2 closestPoint = ray.pos + ray.dir * clampedPoint;
+
+	if (dot((circle.pos - closestPoint), (circle.pos - closestPoint)) <= circle.radius * circle.radius) { cd = { true }; }
+	return cd;
 }
 CollisionData iTest(const Circle & circle, const Plane & plane)
 {
