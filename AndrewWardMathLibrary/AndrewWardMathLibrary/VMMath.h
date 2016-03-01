@@ -15,5 +15,7 @@
 #define PI 3.141592654
 #define DEGtoRAD PI / 180.0f
 #define FLT_EPSILON 0.00001
-#define UP { 0, 1 }
-#define RIGHT { 1, 0 }
+#define UP		{ 0,  1 }
+#define RIGHT	{ 1,  0 }
+#define DOWN	{ 0, -1 }
+#define LEFT	{ -1, 0 }

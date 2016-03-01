@@ -26,7 +26,11 @@ CollisionData iTest(const AABB & rect, const Circle & circle)
 }
 CollisionData iTest(const AABB & rect, const Ray & ray)
 {
-	return CollisionData();
+	CollisionData cd = { false };
+	
+	float t1 = rect.min - ray.pos.x
+
+	return cd;
 }
 CollisionData iTest(const AABB & rect, const Plane & plane)
 {

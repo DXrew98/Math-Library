@@ -16,7 +16,6 @@ void andMath::mat4::setBLock2x2(int row, int col, mat2 a)
 		for (int j = 0; j < 2; ++j)
 			mm[i + col][j + row] = a.mm[i][j];
 }
-
 andMath::mat2 andMath::mat4::getBlock2x2(int row, int col) const
 {
 	
@@ -26,7 +25,6 @@ andMath::mat2 andMath::mat4::getBlock2x2(int row, int col) const
 			n.mm[i][j] = mm[i + col][j + row];
 	return n;
 }
-
 
 andMath::mat4 andMath::transpose(const mat4 & a)
 {
