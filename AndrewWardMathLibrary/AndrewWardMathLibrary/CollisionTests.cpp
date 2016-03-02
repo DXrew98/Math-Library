@@ -28,7 +28,31 @@ CollisionData iTest(const AABB & rect, const Ray & ray)
 {
 	CollisionData cd = { false };
 	
-	float t1 = rect.min - ray.pos.x
+
+	// Min/Max along the X-Axis
+	Plane s1p1  = Plane{ rect.max(), RIGHT	};
+	Plane s1p2  = Plane{ rect.min(), LEFT	};
+	float t11   = rayPlaneDistance(ray, s1p1); // Right
+	float t12   = rayPlaneDistance(ray, s1p2); // Left
+	float t1min = std::fminf(t11, t12);
+	float t1max = std::fmaxf(t11, t12);
+	vec2  n1    = (t11 < t12) ? vec2 RIGHT : vec2 LEFT;
+
+	// Min/Max along the Y-Axis
+	Plane s2p1  = Plane{ rect.max(), UP		};
+	Plane s2p2  = Plane{ rect.min(), DOWN	};
+	float t21   = rayPlaneDistance(ray, s2p1);
+	float t22   = rayPlaneDistance(ray, s2p2);
+	float t2min = std::fminf(t21, t22);
+	float t2max = std::fmaxf(t21, t22);
+	vec2  n2 = (t21 < t22) ? vec2 UP : vec2 DOWN;
+	
+	float tmin  = std::fmaxf(t2min, t1min);
+	float tmax  = std::fminf(t2max, t1max);
+	
+	cd.collsionNormal   = (t1min > t2min) ? n1 : n2;
+	cd.penetrationDepth = ray.len - tmin; 
+	cd.inOverlap		= cd.penetrationDepth >= 0 && tmin <= tmax && tmin > 0;
 
 	return cd;
 }

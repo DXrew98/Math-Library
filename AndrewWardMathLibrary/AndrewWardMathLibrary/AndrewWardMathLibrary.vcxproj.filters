@@ -74,7 +74,7 @@
     <ClInclude Include="Mat2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dependancies.h">
+    <ClInclude Include="Extra.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
